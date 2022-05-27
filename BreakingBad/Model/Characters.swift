@@ -8,8 +8,8 @@
 import Foundation
 
 struct Characters: Decodable {
-    let char_id: Int
-    let name: String
-    let img: String
-    let portrayed: String
+    let char_id: Int?
+    let name: String?
+    let img: String?
+    let portrayed: String?
 }
