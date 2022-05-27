@@ -16,6 +16,7 @@
 		F36F2AB32840F10500654BA5 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F2AB22840F10500654BA5 /* Characters.swift */; };
 		F36F2AB52840F2CA00654BA5 /* CharactersListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F2AB42840F2CA00654BA5 /* CharactersListViewCell.swift */; };
 		F36F2AB72840F30500654BA5 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F2AB62840F30500654BA5 /* CharactersViewController.swift */; };
+		F36F2ABC284128E300654BA5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F2ABB284128E300654BA5 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F36F2AB22840F10500654BA5 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		F36F2AB42840F2CA00654BA5 /* CharactersListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewCell.swift; sourceTree = "<group>"; };
 		F36F2AB62840F30500654BA5 /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
+		F36F2ABB284128E300654BA5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				F36F2AA02840F0A700654BA5 /* SceneDelegate.swift */,
 				F36F2AA92840F0A800654BA5 /* LaunchScreen.storyboard */,
 				F36F2AA42840F0A700654BA5 /* Main.storyboard */,
+				F36F2ABD284128EE00654BA5 /* NetworkManager */,
 				F36F2ABA2840F50D00654BA5 /* Model */,
 				F36F2AB92840F4F300654BA5 /* Views */,
 				F36F2AB82840F4D000654BA5 /* ViewControllers */,
@@ -98,6 +101,14 @@
 				F36F2AB22840F10500654BA5 /* Characters.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F36F2ABD284128EE00654BA5 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				F36F2ABB284128E300654BA5 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 				F36F2AB52840F2CA00654BA5 /* CharactersListViewCell.swift in Sources */,
 				F36F2AA32840F0A700654BA5 /* FullInfoViewController.swift in Sources */,
 				F36F2AB72840F30500654BA5 /* CharactersViewController.swift in Sources */,
+				F36F2ABC284128E300654BA5 /* NetworkManager.swift in Sources */,
 				F36F2A9F2840F0A700654BA5 /* AppDelegate.swift in Sources */,
 				F36F2AA12840F0A700654BA5 /* SceneDelegate.swift in Sources */,
 				F36F2AB32840F10500654BA5 /* Characters.swift in Sources */,

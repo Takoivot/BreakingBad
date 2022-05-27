@@ -16,8 +16,8 @@ struct Characters: Decodable {
     var description: String {
         """
         Name: \(name ?? "unknown")
-        Nick name \(nickname ?? "unknown")
-        Actor name \(portrayed ?? "unknown")
+        Nick name: \(nickname ?? "unknown")
+        Actor name: \(portrayed ?? "unknown")
         """
     }
 }
