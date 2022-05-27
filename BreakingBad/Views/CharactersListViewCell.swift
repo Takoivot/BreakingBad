@@ -14,11 +14,14 @@ class CharactersListViewCell: UITableViewCell {
     
     func configure(with character: Characters){
         descriptionChar.text = character.name
+        
         DispatchQueue.global().async {
             guard let url = URL(string: character.img ?? "" ) else {return}
             guard let imageData = try? Data(contentsOf: url) else {return}
             DispatchQueue.main.async {
                 self.photoChar.image = UIImage(data: imageData)
+                self.photoChar.layer.cornerRadius = self.photoChar.frame.height / 2
+
             }
         }
     }
