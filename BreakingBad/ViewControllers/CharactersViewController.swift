@@ -9,13 +9,13 @@ import UIKit
 
 class CharactersViewController: UITableViewController {
     
-    let url = "https://www.breakingbadapi.com/api/characters"
+    //let url = "https://www.breakingbadapi.com/api/characters"
     
     var characters: [Characters] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchCharacters()
+        fetchCharactersNM()
         tableView.rowHeight = 100
     }
 
@@ -44,7 +44,7 @@ class CharactersViewController: UITableViewController {
 
 }
 
-extension CharactersViewController {
+/*extension CharactersViewController {
     private func fetchCharacters() {
         guard let url = URL(string: url) else {return}
         
@@ -64,5 +64,22 @@ extension CharactersViewController {
                 print(error)
             }
         }.resume()
+    }
+}
+ */
+
+extension CharactersViewController {
+    private func fetchCharactersNM() {
+        NetworkManager.shared.fetchCharacter { result in
+            switch result {
+            case .success(let character):
+                self.characters = character
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

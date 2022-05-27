@@ -16,10 +16,10 @@ class FullInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        configureNM()
     }
 }
-
+/*
 extension FullInfoViewController{
     func configure(){
         descriptionCharacter.text = character.description
@@ -28,6 +28,22 @@ extension FullInfoViewController{
             guard let imageData = try? Data(contentsOf: url) else {return}
             DispatchQueue.main.async {
                 self.photoCharacter.image = UIImage(data: imageData)
+            }
+        }
+    }
+}
+*/
+extension FullInfoViewController{
+    func configureNM(){
+        descriptionCharacter.text = character.description
+        NetworkManager.shared.fetchImage(with: character) { result in
+            switch result {
+            case .success(let imageData):
+                DispatchQueue.main.async {
+                    self.photoCharacter.image = UIImage(data: imageData)
+                }
+            case .failure(let error):
+                print(error)
             }
         }
     }
