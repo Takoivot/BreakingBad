@@ -10,6 +10,14 @@ import Foundation
 struct Characters: Decodable {
     let char_id: Int?
     let name: String?
+    let nickname: String?
     let img: String?
     let portrayed: String?
+    var description: String {
+        """
+        Name: \(name ?? "unknown")
+        Nick name \(nickname ?? "unknown")
+        Actor name \(portrayed ?? "unknown")
+        """
+    }
 }
