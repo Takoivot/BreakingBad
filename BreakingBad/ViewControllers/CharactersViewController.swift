@@ -8,38 +8,31 @@
 import UIKit
 
 class CharactersViewController: UITableViewController {
+    
+    let url = "https://www.breakingbadapi.com/api/characters"
+    
+    var characters: [Characters] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCharacters()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        characters.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bad", for: indexPath) as! CharactersListViewCell
+        let character = characters[indexPath.row]
+        cell.configure(with: character)
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,4 +79,27 @@ class CharactersViewController: UITableViewController {
     }
     */
 
+}
+
+extension CharactersViewController {
+    private func fetchCharacters() {
+        guard let url = URL(string: url) else {return}
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "No error description")
+                return
+            }
+            
+            do {
+                self.characters = try JSONDecoder().decode([Characters].self, from: data)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
+            }catch let error {
+                print(error)
+            }
+        }.resume()
+    }
 }

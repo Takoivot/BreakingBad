@@ -9,15 +9,17 @@ import UIKit
 
 class CharactersListViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet var photoChar: UIImageView!
+    @IBOutlet var descriptionChar: UILabel!
+    
+    func configure(with character: Characters){
+        descriptionChar.text = character.name
+        DispatchQueue.global().async {
+            guard let url = URL(string: character.img ?? "" ) else {return}
+            guard let imageData = try? Data(contentsOf: url) else {return}
+            DispatchQueue.main.async {
+                self.photoChar.image = UIImage(data: imageData)
+            }
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
