@@ -16,7 +16,8 @@ class FullInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNM()
+        configureAF()
+        
     }
 }
 /*
@@ -32,7 +33,7 @@ extension FullInfoViewController{
         }
     }
 }
-*/
+
 extension FullInfoViewController{
     func configureNM(){
         descriptionCharacter.text = character.description
@@ -41,6 +42,22 @@ extension FullInfoViewController{
             case .success(let imageData):
                 DispatchQueue.main.async {
                     self.photoCharacter.image = UIImage(data: imageData)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+*/
+extension FullInfoViewController{
+    func configureAF(){
+        descriptionCharacter.text = character.description
+        NetworkManager.shared.fetchImageAF(with: character) { result in
+            switch result {
+            case .success(let imageDate):
+                DispatchQueue.main.async {
+                    self.photoCharacter.image = UIImage(data: imageDate)
                 }
             case .failure(let error):
                 print(error)

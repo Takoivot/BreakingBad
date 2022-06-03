@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 enum NetworkError: Error {
   case badURL
@@ -19,7 +20,7 @@ struct NetworkManager {
     private let urlString = "https://www.breakingbadapi.com/api/characters"
     
     private init() {}
-    
+    /*
     func fetchCharacter(completionHandler: @escaping(Result <[Characters], NetworkError>) -> Void){
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.badURL))
@@ -58,5 +59,39 @@ struct NetworkManager {
                 return
             }
         }
+    }
+     */
+    
+    
+    func fetchCharactersWithAlamofire(completion: @escaping(Result<[Characters], NetworkError>) -> Void){
+        AF.request(urlString)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let characters = Characters.getCharacters(from: value)
+                    DispatchQueue.main.async {
+                        completion(.success(characters))
+                    }
+                case .failure:
+                    completion(.failure(.decodeError))
+                }
+            }
+    }
+    
+    func fetchImageAF(with character: Characters , completion: @escaping(Result<Data, NetworkError>) -> Void){
+        AF.request(character.img ?? "")
+            .validate()
+            .responseData { responseData in
+                switch responseData.result {
+                case .success(let value):
+                    let imageDate = value
+                    DispatchQueue.main.async {
+                        completion(.success(imageDate))
+                    }
+                case .failure:
+                    completion(.failure(.invalidData))
+                }
+            }
     }
 }

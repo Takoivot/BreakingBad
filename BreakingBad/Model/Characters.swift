@@ -20,4 +20,17 @@ struct Characters: Decodable {
         Actor name: \(portrayed ?? "unknown")
         """
     }
+    
+    init(characterDate: [String : Any]) {
+        char_id = characterDate["char_id"] as? Int
+        name = characterDate["name"] as? String
+        nickname = characterDate["nickname"] as? String
+        img = characterDate["img"] as? String
+        portrayed = characterDate["portrayed"] as? String
+    }
+    
+    static func getCharacters(from value: Any) -> [Characters] {
+        guard let charactersDate = value as? [[String : Any]] else {return []}
+        return charactersDate.compactMap {Characters(characterDate: $0)}
+    }
 }
