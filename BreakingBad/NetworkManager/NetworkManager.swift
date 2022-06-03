@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 enum NetworkError: Error {
   case badURL
@@ -58,5 +59,21 @@ struct NetworkManager {
                 return
             }
         }
+    }
+    
+    func fetchCharactersWithAlamofire(completion: @escaping(Result<[Characters], NetworkError>) -> Void){
+        AF.request(urlString)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let characters = Characters.getCharacters(from: value)
+                    DispatchQueue.main.async {
+                        completion(.success(characters))
+                    }
+                case .failure:
+                    completion(.failure(.decodeError))
+                }
+            }
     }
 }

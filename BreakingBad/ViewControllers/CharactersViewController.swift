@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CharactersViewController: UITableViewController {
     
@@ -15,7 +16,7 @@ class CharactersViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchCharactersNM()
+        fetchCharactersAF()
         tableView.rowHeight = 100
     }
 
@@ -66,7 +67,7 @@ class CharactersViewController: UITableViewController {
         }.resume()
     }
 }
- */
+ 
 
 extension CharactersViewController {
     private func fetchCharactersNM() {
@@ -77,6 +78,21 @@ extension CharactersViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+*/
+//MARK: Alamofire func
+extension CharactersViewController {
+    private func fetchCharactersAF() {
+        NetworkManager.shared.fetchCharactersWithAlamofire { result in
+            switch result{
+            case .success(let characters):
+                self.characters = characters
+                self.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
