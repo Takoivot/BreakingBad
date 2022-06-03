@@ -9,9 +9,7 @@ import UIKit
 import Alamofire
 
 class CharactersViewController: UITableViewController {
-    
-    //let url = "https://www.breakingbadapi.com/api/characters"
-    
+        
     var characters: [Characters] = []
     
     override func viewDidLoad() {
@@ -28,21 +26,18 @@ class CharactersViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bad", for: indexPath) as! CharactersListViewCell
         let character = characters[indexPath.row]
-        cell.configure(with: character)
+        cell.configureAF(with: character)
 
         return cell
     }
     
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let fullInfoVC = segue.destination as? FullInfoViewController else {return}
         guard let indexPath = tableView.indexPathForSelectedRow else {return}
         let character = characters[indexPath.row]
         fullInfoVC.character = character
     }
-  
-
 }
 
 /*extension CharactersViewController {
@@ -59,7 +54,6 @@ class CharactersViewController: UITableViewController {
                 self.characters = try JSONDecoder().decode([Characters].self, from: data)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    
                 }
             }catch let error {
                 print(error)
@@ -67,7 +61,6 @@ class CharactersViewController: UITableViewController {
         }.resume()
     }
 }
- 
 
 extension CharactersViewController {
     private func fetchCharactersNM() {
@@ -85,6 +78,7 @@ extension CharactersViewController {
     }
 }
 */
+
 //MARK: Alamofire func
 extension CharactersViewController {
     private func fetchCharactersAF() {
